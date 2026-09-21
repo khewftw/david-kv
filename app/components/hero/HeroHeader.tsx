@@ -15,7 +15,11 @@ export function HeroHeader({ menuOpen, onMenuToggle }: HeroHeaderProps) {
   const onHero = useHeaderOnHero();
 
   return (
-    <header className="header-tone pointer-events-none fixed inset-x-0 top-0 z-50 bg-transparent">
+    <header
+      className={`header-tone pointer-events-none fixed inset-x-0 top-0 z-50 ${
+        onHero ? "bg-transparent" : "bg-white/20 backdrop-blur-[8px]"
+      }`}
+    >
       <HeroShell className="pointer-events-auto">
         <div
           className={`flex h-20 items-center justify-between border-b lg:hidden ${

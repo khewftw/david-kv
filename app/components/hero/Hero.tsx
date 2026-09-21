@@ -21,27 +21,29 @@ export function Hero() {
   }, [menuOpen]);
 
   return (
-    <section
-      data-hero
-      className="relative h-svh min-h-[720px] overflow-x-hidden text-white max-lg:min-h-svh"
-    >
-      <HeroBackground />
-      <div className="relative z-10 flex h-full min-h-[720px] flex-col max-lg:min-h-svh">
-        <HeroHeader
-          menuOpen={menuOpen}
-          onMenuToggle={() => setMenuOpen((open) => !open)}
-        />
-        <div className="h-20 shrink-0 lg:h-[84px]" aria-hidden="true" />
-        <HeroShell
-          className="flex min-h-0 flex-1 flex-col"
-          innerClassName="flex h-full min-h-0 flex-1 flex-col"
-        >
-          <DesktopHero />
-          <MobileHero />
-        </HeroShell>
-      </div>
+    <>
+      <HeroHeader
+        menuOpen={menuOpen}
+        onMenuToggle={() => setMenuOpen((open) => !open)}
+      />
       <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
-    </section>
+      <section
+        data-hero
+        className="relative h-svh min-h-[720px] overflow-x-hidden text-white max-lg:min-h-svh"
+      >
+        <HeroBackground />
+        <div className="relative z-10 flex h-full min-h-[720px] flex-col max-lg:min-h-svh">
+          <div className="h-20 shrink-0 lg:h-[84px]" aria-hidden="true" />
+          <HeroShell
+            className="flex min-h-0 flex-1 flex-col"
+            innerClassName="flex h-full min-h-0 flex-1 flex-col"
+          >
+            <DesktopHero />
+            <MobileHero />
+          </HeroShell>
+        </div>
+      </section>
+    </>
   );
 }
 

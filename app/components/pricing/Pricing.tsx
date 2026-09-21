@@ -8,7 +8,7 @@ export function Pricing() {
   return (
     <section
       id="services"
-      className="pricing-section scroll-mt-24 bg-[#F8F6F2] py-[72px] text-[#1F1A17] md:py-24 lg:py-[120px]"
+      className="pricing-section scroll-mt-24 bg-[var(--surface)] py-[72px] text-[var(--text)] md:py-24 lg:py-[120px]"
     >
       <div className="hero-container">
         <div className="mx-auto max-w-[1100px] text-center">

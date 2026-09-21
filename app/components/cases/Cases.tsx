@@ -61,7 +61,7 @@ export function Cases() {
   return (
     <section
       id="projects"
-      className="cases-scroll-section scroll-mt-0 bg-[#F8F6F2] text-[#1F1A17]"
+      className="cases-scroll-section scroll-mt-0 bg-[var(--surface)] text-[var(--text)]"
     >
       <div className="hero-container">
         <div className="cases-layout">
@@ -114,7 +114,7 @@ export function Cases() {
 
         <Link
           href={cases.ctaHref}
-          className="mt-7 flex min-h-[60px] w-full items-center justify-center rounded-[18px] bg-accent font-ui text-base font-semibold text-white transition-opacity duration-250 hover:opacity-90 md:hidden"
+          className="mt-7 hidden min-h-[56px] w-full items-center justify-center rounded-[18px] bg-accent font-ui text-sm font-semibold text-white transition-opacity duration-250 hover:opacity-90 md:hidden"
         >
           {cases.moreCta}
         </Link>
@@ -147,16 +147,13 @@ function CaseCard({
       <CaseGallery images={item.images} />
       <div className="case-block__content">
         <div className="case-block__top">
-          <h3 className="case-block__headline">
-            <span className="block">{item.headline} —</span>
-            <span className="block">
-              {item.area} за {item.term}
-            </span>
-          </h3>
           <div className="case-block__object-badge">
             <span className="case-block__icon case-block__icon--cases" aria-hidden="true" />
             {item.name}
           </div>
+          <h3 className="case-block__headline">
+            {item.headline} — {item.area} за {item.term}
+          </h3>
         </div>
         <p className="case-block__description">{item.description}</p>
         <Link href={href} className="case-block__cta">

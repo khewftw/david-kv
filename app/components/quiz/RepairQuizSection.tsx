@@ -43,7 +43,6 @@ const emptyForm: FormDataState = {
 };
 
 const AUTO_NEXT_MS = 220;
-const RANGE_NEXT_MS = 320;
 
 export function RepairQuizSection() {
   const [currentStep, setCurrentStep] = useState(0);
@@ -126,16 +125,15 @@ export function RepairQuizSection() {
     if (autoAdvance) scheduleNext(AUTO_NEXT_MS);
   }
 
-  function selectArea(value: number, autoAdvance: boolean) {
+  function selectArea(value: number) {
     const next = Math.min(AREA_MAX, Math.max(AREA_MIN, value));
     setAreaDraft(next);
     setAnswers((current) => ({ ...current, area: String(next) }));
-    if (autoAdvance) scheduleNext(RANGE_NEXT_MS);
   }
 
   function handleNext() {
     if (step.id === "area") {
-      if (!answers.area) selectArea(areaDraft, false);
+      if (!answers.area) selectArea(areaDraft);
       goNext();
       return;
     }
@@ -179,7 +177,7 @@ export function RepairQuizSection() {
   return (
     <section
       id="contacts"
-      className="quiz-section scroll-mt-24 bg-[#F8F6F2] py-16 md:py-[72px] lg:py-[88px]"
+      className="quiz-section scroll-mt-24"
     >
       <div className="hero-container">
         <div className="quiz-shell">
@@ -212,8 +210,7 @@ export function RepairQuizSection() {
                       selectedId={selectedId}
                       areaValue={areaDraft}
                       onSelect={selectOption}
-                      onAreaInput={(value) => selectArea(value, false)}
-                      onAreaCommit={(value) => selectArea(value, true)}
+                      onAreaInput={selectArea}
                     />
                   )}
                 </div>
@@ -278,14 +275,12 @@ function QuizStepView({
   areaValue,
   onSelect,
   onAreaInput,
-  onAreaCommit,
 }: {
   step: QuizStep;
   selectedId?: string;
   areaValue: number;
   onSelect: (option: QuizOption) => void;
   onAreaInput: (value: number) => void;
-  onAreaCommit: (value: number) => void;
 }) {
   return (
     <>
@@ -303,11 +298,7 @@ function QuizStepView({
         </div>
       ) : null}
       {step.type === "range" ? (
-        <RangeStep
-          value={areaValue}
-          onInput={onAreaInput}
-          onCommit={onAreaCommit}
-        />
+        <RangeStep value={areaValue} onInput={onAreaInput} />
       ) : null}
       {step.type === "vertical-options" ? (
         <div className="quiz-rows">
@@ -413,9 +404,6 @@ function VerticalOption({
       onClick={() => onSelect(option)}
     >
       <span className="quiz-radio" aria-hidden />
-      <span className="quiz-row-icon">
-        <QuizIcon name={option.icon} />
-      </span>
       <span className="quiz-row-copy">
         <span className="quiz-row-title">{option.title}</span>
         {option.hint ? <span className="quiz-row-hint">{option.hint}</span> : null}
@@ -427,11 +415,9 @@ function VerticalOption({
 function RangeStep({
   value,
   onInput,
-  onCommit,
 }: {
   value: number;
   onInput: (value: number) => void;
-  onCommit: (value: number) => void;
 }) {
   const fill = ((value - AREA_MIN) / (AREA_MAX - AREA_MIN)) * 100;
   const activePreset = areaPresetId(value);
@@ -451,7 +437,6 @@ function RangeStep({
           style={{ "--quiz-fill": `${fill}%` } as CSSProperties}
           aria-label="Площадь объекта"
           onChange={(event) => onInput(Number(event.target.value))}
-          onPointerUp={(event) => onCommit(Number((event.target as HTMLInputElement).value))}
         />
         <span className="quiz-slider-scale">
           <span>{AREA_MIN} м²</span>
@@ -464,7 +449,7 @@ function RangeStep({
             key={preset.id}
             type="button"
             className={`quiz-chip ${activePreset === preset.id ? "is-selected" : ""}`}
-            onClick={() => onCommit(preset.value)}
+            onClick={() => onInput(preset.value)}
           >
             {preset.title}
           </button>

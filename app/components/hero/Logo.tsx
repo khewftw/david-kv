@@ -9,15 +9,15 @@ type LogoProps = {
 
 const logoMeta = {
   horiz: {
-    src: "/horiz-logo.svg",
-    darkSrc: "/horiz-logo-dark.svg",
+    src: "/horiz-logo.svg?v=bordeaux",
+    darkSrc: "/horiz-logo-dark.svg?v=bordeaux",
     width: 183,
     height: 52,
     className: "h-9 w-auto max-w-[min(100%,210px)] lg:h-[52px] lg:max-w-[240px]",
   },
   vert: {
-    src: "/vert-logo.svg",
-    darkSrc: "/vert-logo.svg",
+    src: "/vert-logo.svg?v=bordeaux",
+    darkSrc: "/vert-logo.svg?v=bordeaux",
     width: 97,
     height: 66,
     className: "h-[66px] w-auto",

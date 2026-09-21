@@ -39,13 +39,22 @@ export function HeroBackground() {
         className="absolute inset-[-18%] will-change-transform"
       >
         <Image
-          src="/hero/apartment.jpg"
-          alt="Современный интерьер квартиры после ремонта"
+          src="/hero/hero-9x16.png"
+          alt="Интерьер квартиры после ремонта"
           fill
           priority
           quality={90}
           sizes="100vw"
-          className="object-cover object-center"
+          className="object-cover object-center md:hidden"
+        />
+        <Image
+          src="/hero/hero-16x9.png"
+          alt="Интерьер квартиры после ремонта"
+          fill
+          priority
+          quality={90}
+          sizes="100vw"
+          className="hidden object-cover object-center md:block"
         />
       </div>
       <div

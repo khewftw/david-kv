@@ -40,7 +40,7 @@ export function Quality() {
 
     const mm = gsap.matchMedia();
 
-    mm.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", () => {
+    mm.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
       const getScrollAmount = () =>
         Math.max(0, track.scrollWidth - window.innerWidth);
 

@@ -1,33 +1,27 @@
-const casePhotos = [
-  {
-    src: "/cases/simvol.jpg",
-    alt: "Гостиная после капитального ремонта в ЖК Символ",
-  },
-  {
-    src: "/cases/headliner.jpg",
-    alt: "Дизайнерский интерьер после ремонта в ЖК Headliner",
-  },
-  {
-    src: "/cases/scandinavia.jpg",
-    alt: "Компактная квартира после ремонта под ключ в ЖК Скандинавия",
-  },
-  {
-    src: "/cases/ostrov.jpg",
-    alt: "Просторная квартира после дизайнерского ремонта в ЖК Остров",
-  },
-  {
-    src: "/cases/paveletskaya.jpg",
-    alt: "Современный интерьер после капитального ремонта в ЖК Павелецкая City",
-  },
-  {
-    src: "/hero/apartment.jpg",
-    alt: "Интерьер квартиры после ремонта под ключ",
-  },
+const case1Photos = [
+  { src: "/cases/case1-living.jpeg", alt: "Гостиная после капитального ремонта" },
+  { src: "/cases/case1-kitchen.jpeg", alt: "Кухня-гостиная после чистовой отделки" },
+  { src: "/cases/case1-bedroom.jpeg", alt: "Спальня после ремонта" },
+  { src: "/cases/case1-bathroom.jpeg", alt: "Ванная комната после чистовой отделки" },
+  { src: "/cases/case1-toilet.jpeg", alt: "Санузел после ремонта" },
 ] as const;
 
-function projectGallery(start: number) {
-  return [...casePhotos.slice(start), ...casePhotos.slice(0, start)];
-}
+const case2Photos = [
+  { src: "/cases/case2-living.jpeg", alt: "Гостиная-кухня после дизайнерского ремонта" },
+  { src: "/cases/case2-layout.jpeg", alt: "Планировка гостиной после сдачи" },
+  { src: "/cases/case2-hallway.jpeg", alt: "Прихожая после чистовой отделки" },
+  { src: "/cases/case2-bedroom.jpeg", alt: "Спальня после дизайнерского ремонта" },
+  { src: "/cases/case2-bathroom.jpeg", alt: "Ванная комната после ремонта" },
+] as const;
+
+const case3Photos = [
+  { src: "/cases/case3-living.jpeg", alt: "Гостиная-кухня после ремонта под ключ" },
+  { src: "/cases/case3-apartment.jpeg", alt: "Интерьер квартиры после сдачи" },
+  { src: "/cases/case3-kitchen.jpeg", alt: "Кухня после чистовой отделки" },
+  { src: "/cases/case3-dining.jpeg", alt: "Кухня-столовая после ремонта" },
+  { src: "/cases/case3-bedroom.jpeg", alt: "Спальня после ремонта под ключ" },
+  { src: "/cases/case3-bathroom.jpeg", alt: "Ванная комната после сдачи" },
+] as const;
 
 export const site = {
   name: "Преемство",
@@ -129,7 +123,7 @@ export const site = {
         headline: "Готовая квартира под ключ",
         description:
           "Полностью обновили квартиру: инженерия, подготовка поверхностей, чистовая отделка и финальная сдача под ключ.",
-        images: projectGallery(0),
+        images: [...case1Photos, case3Photos[0]],
         accent: false,
       },
       {
@@ -140,7 +134,7 @@ export const site = {
         headline: "Дизайнерский интерьер без компромиссов",
         description:
           "Сложные узлы, сценарное освещение и нестандартные материалы реализованы точно по дизайн-проекту.",
-        images: projectGallery(1),
+        images: [...case2Photos, case3Photos[3]],
         accent: true,
       },
       {
@@ -151,7 +145,7 @@ export const site = {
         headline: "Каждый метр работает на комфорт",
         description:
           "Продумали хранение, инженерные решения и отделку так, чтобы каждый метр работал на комфорт.",
-        images: projectGallery(2),
+        images: case3Photos,
         accent: false,
       },
       {
@@ -162,7 +156,7 @@ export const site = {
         headline: "От пустой квартиры до готового интерьера",
         description:
           "Полный цикл ремонта: от инженерии и черновых этапов до света, мебели и финальной приёмки.",
-        images: projectGallery(3),
+        images: [...case3Photos.slice(0, 4), case2Photos[0], case2Photos[3]],
         accent: true,
       },
       {
@@ -173,7 +167,11 @@ export const site = {
         headline: "Практичный интерьер без потери эстетики",
         description:
           "Совместили практичную планировку, спокойную отделку и технические решения без визуального шума.",
-        images: projectGallery(4),
+        images: [
+          { src: "/cases/renovated.jpeg", alt: "Гостиная после капитального ремонта" },
+          ...case1Photos.slice(0, 4),
+          case2Photos[2],
+        ],
         accent: false,
       },
     ],
@@ -189,7 +187,7 @@ export const site = {
       { text: "Показываем три базовых тарифа: от чернового до дизайнерского. Вы сразу понимаете ориентир по стоимости, состав работ и формат реализации.", accent: false },
     ],
     note: "Точную стоимость рассчитываем после замера, но уже сейчас можно понять порядок бюджета и выбрать подходящий формат.",
-    cta: "Рассчитать полную стоимость",
+    cta: "Рассчитать стоимость",
     ctaHref: "#contacts",
     footer: "Не уверены, какой формат подойдёт именно вам?",
     footerCta: "Получить консультацию",
@@ -229,7 +227,7 @@ export const site = {
         term: "Сроки: от 60 дней",
         materials: "Материалы: от 7 000 ₽/м²",
         image: {
-          src: "/cases/ostrov.jpg",
+          src: "/cases/case1-living.jpeg",
           alt: "Современный интерьер после капитального ремонта",
         },
         accent: true,
@@ -249,7 +247,7 @@ export const site = {
         term: "Сроки: от 85 дней",
         materials: "Материалы: от 9 000 ₽/м²",
         image: {
-          src: "/cases/headliner.jpg",
+          src: "/cases/case3-living.jpeg",
           alt: "Премиальный дизайнерский интерьер после ремонта",
         },
         accent: false,

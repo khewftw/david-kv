@@ -42,28 +42,25 @@ export function Stats() {
           </p>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 gap-9 md:mt-16 md:grid-cols-2 md:gap-7 lg:mt-[72px] lg:grid-cols-4 lg:gap-8">
+        <div className="stats-grid">
           {stats.items.map((item, index) => (
             <article
               key={item.title}
-              className={`stat-item px-2 text-center lg:border-r lg:border-[rgba(31,26,23,0.08)] lg:px-6 lg:last:border-r-0 ${
-                visible ? "is-visible" : ""
-              }`}
+              className={`stat-item ${visible ? "is-visible" : ""}`}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
-              <StatValue
-                value={item.value}
-                suffix={item.suffix}
-                unit={item.unit}
-                active={visible}
-                delay={index * 100}
-              />
-              <h3 className="mx-auto mt-[18px] max-w-[18rem] font-ui text-[22px] font-semibold leading-[1.1] lg:text-[28px]">
-                {item.title}
-              </h3>
-              <p className="mx-auto mt-3.5 max-w-[320px] font-ui text-[15px] font-normal leading-[1.55] text-[rgba(31,26,23,0.72)] md:text-base lg:text-[17px]">
-                {item.text}
-              </p>
+              <div className="stat-number-wrap">
+                <span className="stat-wreath" aria-hidden="true" />
+                <StatValue
+                  value={item.value}
+                  suffix={item.suffix}
+                  unit={item.unit}
+                  active={visible}
+                  delay={index * 100}
+                />
+              </div>
+              <h3 className="stat-item__title">{item.title}</h3>
+              <p className="stat-item__text">{item.text}</p>
             </article>
           ))}
         </div>
@@ -88,14 +85,10 @@ function StatValue({
   const count = useCountUp(value, active, delay);
 
   return (
-    <p className="stat-number flex items-end justify-center whitespace-nowrap text-[clamp(68px,8vw,132px)] font-medium tracking-[-0.03em] leading-[0.9]">
+    <p className="stat-number">
       <span>{count}</span>
       {suffix && count >= value ? <span>{suffix}</span> : null}
-      {unit ? (
-        <span className="mb-[0.08em] ml-[0.12em] text-[clamp(28px,2.6vw,52px)] leading-none tracking-[-0.02em]">
-          {unit}
-        </span>
-      ) : null}
+      {unit ? <span className="stat-unit">{unit}</span> : null}
     </p>
   );
 }

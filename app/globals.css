@@ -26,11 +26,18 @@
   --font-ui: var(--font-inter-tight), "Inter Tight", sans-serif;
 }
 
-html,
+html {
+  background: var(--surface);
+  color: var(--text);
+  overflow-x: clip;
+  overflow-y: auto;
+}
+
 body {
   background: var(--surface);
   color: var(--text);
   overflow-x: clip;
+  overflow-y: visible;
 }
 
 body {
@@ -328,6 +335,11 @@ body {
 
 .hero-enter {
   animation: hero-enter 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+[data-hero] {
+  overflow: visible;
+  touch-action: pan-y;
 }
 
 @media (prefers-reduced-motion: reduce) {

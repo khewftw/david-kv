@@ -29,10 +29,10 @@ export function Hero() {
       <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
       <section
         data-hero
-        className="relative h-svh min-h-[720px] overflow-x-hidden text-white max-lg:min-h-svh"
+        className="relative min-h-svh text-white lg:h-svh lg:min-h-[720px]"
       >
         <HeroBackground />
-        <div className="relative z-10 flex h-full min-h-[720px] flex-col max-lg:min-h-svh">
+        <div className="relative z-10 flex min-h-svh flex-col lg:h-full lg:min-h-[720px]">
           <div className="h-20 shrink-0 lg:h-[84px]" aria-hidden="true" />
           <HeroShell
             className="flex min-h-0 flex-1 flex-col"

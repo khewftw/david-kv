@@ -1,9 +1,14 @@
-import Image from "next/image";
+"use client";
+
+import { useEffect, useRef, useState, type RefObject } from "react";
 import Link from "next/link";
+import { BeforeAfterSlider } from "@/app/components/pricing/BeforeAfterSlider";
 import { site } from "@/app/lib/site";
 
 export function Pricing() {
   const { pricing } = site;
+  const gridRef = useRef<HTMLDivElement>(null);
+  const visible = useInView(gridRef);
 
   return (
     <section
@@ -42,19 +47,23 @@ export function Pricing() {
           </p>
         </div>
 
-        <div className="pricing-grid">
+        <div
+          ref={gridRef}
+          className={`pricing-grid is-ready ${visible ? "is-visible" : ""}`}
+        >
           {pricing.items.map((item) => (
             <article
               key={item.name}
               className={`pricing-card ${item.accent ? "is-accent" : ""}`}
             >
-              <div className="pricing-card__image relative">
-                <Image
-                  src={item.image.src}
+              <div className="pricing-card__image">
+                <BeforeAfterSlider
+                  before={item.beforeImage}
+                  after={item.afterImage}
+                  beforeLabel="До"
+                  afterLabel="После"
                   alt={item.image.alt}
-                  fill
-                  sizes="(max-width: 1023px) 100vw, 33vw"
-                  className="object-cover"
+                  playHint={visible}
                 />
               </div>
               <div className="pricing-card__body">
@@ -92,4 +101,33 @@ export function Pricing() {
       </div>
     </section>
   );
+}
+
+function useInView(ref: RefObject<HTMLElement | null>) {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.18 },
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [ref]);
+
+  return visible;
 }
